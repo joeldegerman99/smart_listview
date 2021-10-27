@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_listview/smart_listview.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,6 +43,9 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SmartListView(
+        onRefresh: () async {
+          await Future.delayed(Duration(milliseconds: 4000));
+        },
         onLoading: () async {
           await Future.delayed(Duration(milliseconds: 4000));
           controller.refreshComplete();

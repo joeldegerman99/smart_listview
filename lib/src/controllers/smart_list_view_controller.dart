@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum SmartListViewState { idle, dragging, armed, loading }
+enum SmartListViewState { idle, armed, loading, noMoreData }
 
 class SmartListViewController extends ChangeNotifier {
   SmartListViewController() {
@@ -24,24 +24,19 @@ class SmartListViewController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setNoMoreData() {
+    _state = SmartListViewState.noMoreData;
+    notifyListeners();
+  }
+
   void handleScrollNotification(ScrollNotification notification) {
     if (state == SmartListViewState.loading) return;
-    if (notification is ScrollStartNotification) {
-      _state = SmartListViewState.dragging;
-      notifyListeners();
-    }
 
     if (notification is ScrollUpdateNotification) {
       final prevState = _state;
 
       if (notification.metrics.pixels >= notification.metrics.maxScrollExtent) {
         _state = SmartListViewState.armed;
-        if (prevState != _state) {
-          notifyListeners();
-        }
-      } else {
-        _state = SmartListViewState.dragging;
-        // print(prevState);
         if (prevState != _state) {
           notifyListeners();
         }
