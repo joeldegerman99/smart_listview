@@ -1,7 +1,7 @@
 name: smart_listview
 description: A ListView wrapper which helps with refreshing and loading more data
 version: 0.0.1
-homepage: none
+homepage: https://github.com/joeldegerman99/smart_listview
 
 environment:
   sdk: '>=2.16.2 <3.0.0'
