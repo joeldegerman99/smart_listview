@@ -1,7 +1,7 @@
 name: smart_listview
-description: A new Flutter package project.
+description: A ListView wrapper which helps with refreshing and loading more data
 version: 0.0.1
-homepage:
+homepage: none
 
 environment:
   sdk: '>=2.16.2 <3.0.0'
