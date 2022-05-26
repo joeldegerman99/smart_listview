@@ -10,6 +10,7 @@ class SmartListView extends StatelessWidget {
     required this.smartController,
     required this.onLoading,
     required this.onRefresh,
+    //  required this.footer,
   }) : super(key: key);
 
   final SmartListViewController smartController;
@@ -18,9 +19,12 @@ class SmartListView extends StatelessWidget {
   final VoidCallback onLoading;
   final Future<void> Function() onRefresh;
 
+  // final SmartListViewFooter footer;
+
   @override
   Widget build(BuildContext context) {
     Widget widget = CustomScrollView(
+      physics: const BouncingScrollPhysics(),
       slivers: [
         if (Platform.isIOS) CupertinoSliverRefreshControl(onRefresh: onRefresh),
         SliverList(
@@ -36,6 +40,8 @@ class SmartListView extends StatelessWidget {
         ValueListenableBuilder(
           builder: (context, value, child) {
             if (value == SmartListViewState.loading) onLoading();
+
+            // if()
 
             late Widget body;
 

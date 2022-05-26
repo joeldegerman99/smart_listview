@@ -43,11 +43,12 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SmartListView(
+        // footer: SmartListViewFooter(),
         onRefresh: () async {
-          await Future.delayed(Duration(milliseconds: 4000));
+          await Future.delayed(const Duration(milliseconds: 4000));
         },
         onLoading: () async {
-          await Future.delayed(Duration(milliseconds: 4000));
+          await Future.delayed(const Duration(milliseconds: 4000));
           controller.refreshComplete();
         },
         smartController: controller,
