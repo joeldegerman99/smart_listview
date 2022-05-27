@@ -8,12 +8,14 @@ class SmartListView extends StatelessWidget {
   const SmartListView({
     Key? key,
     required this.smartController,
+    required this.sliverList,
     required this.onLoading,
     required this.onRefresh,
-    //  required this.footer,
   }) : super(key: key);
 
   final SmartListViewController smartController;
+
+  final Widget sliverList;
 
   /// Remember to complete the refresh on [SmartListViewController]
   final VoidCallback onLoading;
@@ -27,16 +29,7 @@ class SmartListView extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       slivers: [
         if (Platform.isIOS) CupertinoSliverRefreshControl(onRefresh: onRefresh),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((_, index) {
-            return Container(
-              height: 50,
-              width: double.infinity,
-              color: Colors.red,
-              margin: const EdgeInsets.all(10),
-            );
-          }, childCount: 15),
-        ),
+        sliverList,
         ValueListenableBuilder(
           builder: (context, value, child) {
             if (value == SmartListViewState.loading) onLoading();

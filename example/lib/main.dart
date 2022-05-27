@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_listview/smart_listview.dart';
 
@@ -43,13 +42,28 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SmartListView(
+        sliverList: SliverReorderableList(
+            itemBuilder: (context, index) {
+              return ReorderableDragStartListener(
+                key: ValueKey(index),
+                index: index,
+                child: Container(
+                  color: Colors.red,
+                  margin: const EdgeInsets.all(16),
+                  height: 75,
+                  width: double.infinity,
+                ),
+              );
+            },
+            itemCount: 10,
+            onReorder: (oldIndex, newIndex) {}),
         // footer: SmartListViewFooter(),
         onRefresh: () async {
           await Future.delayed(const Duration(milliseconds: 4000));
         },
         onLoading: () async {
           await Future.delayed(const Duration(milliseconds: 4000));
-          controller.refreshComplete();
+          controller.setNoMoreData();
         },
         smartController: controller,
       ),
